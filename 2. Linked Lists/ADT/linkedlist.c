@@ -56,13 +56,29 @@ void insertAtEnd(LNode **head, int data) {
         temp->next    = (void *)0;
     }
 }
+
+void printList(LNode *head) {
+    //If the list is empty, I want a meaningful message that informs
+    //that the list is empty.
+    LNode *current = head;
+    if (current == (void *)0){
+        //Print message if list empty. 
+        printf("List is empty.\n");
+    } else {
+        //Current is not NULL.
+        while(current!=(void *)0){
+            //Print the Data
+            printf("%d ",current->data);
+            //Go to the next node.
+            current = current->next;
+        }
+    }
+}
+
 int main() {
     LNode *head = createList(10);
     insertAtEnd(&head, 20);
     insertAtEnd(&head, 30);
     insertAtEnd(&head, 40);
-    printf("Data at 1st node = %d\n",head->data);
-    printf("Data at 2nd node = %d\n",head->next->data);
-    printf("Data at 3rd node = %d\n",head->next->next->data);
-    printf("Data at 4th node = %d\n",head->next->next->next->data);
+    printList(head);
 }
