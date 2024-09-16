@@ -7,4 +7,5 @@ typedef struct ListNode LNode;
 /* Data Declaration End */
 /* Function Declaration Start */
 LNode *createList(int data);
+void   insertAtEnd(LNode **head, int data);
 /* Function Declaration End */
