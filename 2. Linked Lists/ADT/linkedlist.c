@@ -57,6 +57,23 @@ void insertAtEnd(LNode **head, int data) {
     }
 }
 
+void insertAtFront(LNode **head, int data) {
+    if (*head == (void *)0){
+        //createList was not called. So, we create a new list here.
+        printf("Warning: Create List was not called.\n");
+        printf("Creating a new list.\n");
+        *head = createList(data);
+    } else {
+        //Create a new temporary node with the data.
+        LNode *temp = createNode(data);
+        //1 : Insert Node with Data Value 3
+        //a) Assign the next field of temp to head
+        temp->next  = *head;
+        //b) The new head is assigned to temp.
+        *head       = temp;
+    }
+}
+
 void printList(LNode *head) {
     //If the list is empty, I want a meaningful message that informs
     //that the list is empty.
@@ -77,8 +94,8 @@ void printList(LNode *head) {
 
 int main() {
     LNode *head = createList(10);
-    insertAtEnd(&head, 20);
-    insertAtEnd(&head, 30);
-    insertAtEnd(&head, 40);
+    insertAtFront(&head, 20);
+    insertAtFront(&head, 30);
+    insertAtFront(&head, 40);
     printList(head);
 }

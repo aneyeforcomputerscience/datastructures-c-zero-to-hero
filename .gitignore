@@ -1,4 +1,6 @@
 .vscode
+*.DS_Store
 *.dSYM
+2. Linked Lists/.DS_Store
 2. Linked Lists/ADT/linkedlist
 9. Extras/test
