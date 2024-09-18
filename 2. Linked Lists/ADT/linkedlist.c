@@ -74,6 +74,36 @@ void insertAtFront(LNode **head, int data) {
     }
 }
 
+void insertAtMiddle(LNode **head, int data) {
+    if (*head == (void *)0){
+        //createList was not called. So, we will create a new list.
+        printf("Warning: createList was not called.\n");
+        printf("Creating a new list.\n");
+        *head = createList(data);
+    } else {
+        //1 => 2 => 3 => 4 => 5
+        //Maintain two pointers. 
+        //fastPointer advances by 2 positions.
+        //slowPointer advances by 1 position.
+        //10 => 20 => 30 => 40 => 50 => (void *) 0
+        LNode *slowPointer = *head;
+        LNode *fastPointer = *head;
+        while(slowPointer             != (void *) 0 && 
+              fastPointer             != (void *) 0 && 
+              fastPointer->next       != (void *) 0 && 
+              fastPointer->next->next != (void *) 0) {
+            slowPointer = slowPointer->next;
+            fastPointer = fastPointer->next->next;
+        }
+        LNode *temp = createNode(data);
+        //1 => 2 => 3 => 4 => 5 => (void *)0
+        //6 => 4 => 5 => (void *) 0
+        temp->next  = slowPointer->next;
+        //1 => 2 => 3 => 6 => 4 => 5 => (void *)0
+        slowPointer->next = temp;
+    }
+}
+
 void printList(LNode *head) {
     //If the list is empty, I want a meaningful message that informs
     //that the list is empty.
@@ -94,8 +124,12 @@ void printList(LNode *head) {
 
 int main() {
     LNode *head = createList(10);
-    insertAtFront(&head, 20);
-    insertAtFront(&head, 30);
-    insertAtFront(&head, 40);
+    insertAtEnd(&head, 20);
+    insertAtEnd(&head, 30);
+    insertAtEnd(&head, 40);
+    insertAtEnd(&head, 50);
+    printList(head);
+    printf("\n");
+    insertAtMiddle(&head, 35);
     printList(head);
 }
