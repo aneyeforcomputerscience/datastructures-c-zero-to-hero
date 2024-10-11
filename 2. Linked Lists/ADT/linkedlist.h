@@ -21,4 +21,5 @@ eg: 1 => 2 => 3, Insert Node with Value 4
 */
 void   insertAtMiddle(LNode **head, int data);
 void   printList(LNode *head);
+void   deleteFirstNode(LNode **head);
 /* Function Declaration End */

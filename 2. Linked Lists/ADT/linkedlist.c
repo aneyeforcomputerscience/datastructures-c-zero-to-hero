@@ -120,6 +120,24 @@ void printList(LNode *head) {
             current = current->next;
         }
     }
+    printf("\n");
+}
+
+static void deleteNode(LNode *node){
+    free(node); //To avoid memory leaks.
+    node = (void *)0; //To avoid dangling pointer.
+}
+
+void deleteFirstNode(LNode **head){
+    if(head == (void *)0 || *head == (void *)0){
+        printf("The Linked List is not populated.\n");
+        return;
+    } else {
+        //1=>2=>3=>4
+        LNode *temp = *head;
+        *head = (*head)->next;
+        deleteNode(temp);
+    }
 }
 
 int main() {
@@ -128,8 +146,7 @@ int main() {
     insertAtEnd(&head, 30);
     insertAtEnd(&head, 40);
     insertAtEnd(&head, 50);
-    printList(head);
-    printf("\n");
-    insertAtMiddle(&head, 35);
-    printList(head);
+    printList(head); //10 20 30 40 50
+    deleteFirstNode(&head);
+    printList(head); //20 30 40 50
 }
