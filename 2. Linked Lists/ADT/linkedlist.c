@@ -140,6 +140,39 @@ void deleteFirstNode(LNode **head){
     }
 }
 
+void deleteLastNode(LNode **head){
+    if(head == (void *)0 || *head == (void *)0){
+        printf("The Linked List is not populated.\n");
+        return;
+    } else if ((*head)->next == (void *)0){
+        deleteFirstNode(head);
+    } else {
+        //1=>NULL
+        LNode *current = *head;
+        while(current && current->next && current->next->next != (void *)0){
+            current = current->next;
+        }
+        LNode *temp = current->next; //NULL
+        deleteNode(temp);
+        current->next = (void *)0;
+    }
+}
+
+void deleteLinkedList(LNode **head){
+    if(head == (void *)0 || *head == (void *)0){
+        printf("The Linked List is already empty.\n");
+        return;
+    } else {
+        LNode *current = *head;
+        while(current != (void *)0){
+            LNode *temp = current;
+            current     = current->next;
+            deleteNode(temp); 
+        }
+        *head = (void *)0;
+    }
+}
+
 int main() {
     LNode *head = createList(10);
     insertAtEnd(&head, 20);
@@ -147,6 +180,6 @@ int main() {
     insertAtEnd(&head, 40);
     insertAtEnd(&head, 50);
     printList(head); //10 20 30 40 50
-    deleteFirstNode(&head);
-    printList(head); //20 30 40 50
+    deleteLinkedList(&head);
+    printList(head); //List is Empty.
 }
